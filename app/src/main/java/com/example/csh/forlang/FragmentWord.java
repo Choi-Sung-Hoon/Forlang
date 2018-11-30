@@ -1,6 +1,8 @@
 package com.example.csh.forlang;
 
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -105,7 +107,21 @@ public class FragmentWord extends Fragment implements View.OnClickListener, Text
 				tts.speak(word, TextToSpeech.QUEUE_FLUSH, null, null);
 				break;
 			case R.id.button_add:
+			{
+				ContentResolver cr = v.getContext().getContentResolver();
+				Uri uri = Uri.parse("content://forlang.provider/MyWords");
+
+				ContentValues values = new ContentValues();
+				values.put("word", word);
+				values.put("meaning1", meanings[0]);
+				if(meanings.length >= 2)
+					values.put("meaning2", meanings[1]);
+				if(meanings.length >= 3)
+					values.put("meaning3", meanings[2]);
+
+				cr.insert(uri, values);
 				break;
+			}
 			case R.id.button_search:
 				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://endic.naver.com/search.nhn?sLn=kr&isOnlyViewEE=N&query=" + word));
 				startActivity(intent);
