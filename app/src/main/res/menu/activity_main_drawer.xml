@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android = "http://schemas.android.com/apk/res/android"
+	xmlns:tools = "http://schemas.android.com/tools"
+	tools:showIn = "navigation_view">
+
+	<group android:checkableBehavior = "single">
+		<item
+			android:id = "@+id/nav_word"
+			android:icon = "@drawable/nav_icon_word"
+			android:title = "단어암기" />
+		<item
+			android:id = "@+id/nav_exam"
+			android:icon = "@drawable/nav_icon_exam"
+			android:title = "시험" />
+		<item
+			android:id = "@+id/nav_notebook"
+			android:icon = "@drawable/nav_icon_notebook"
+			android:title = "단어장" />
+		<!--
+		<item
+			android:id = "@+id/nav_manage"
+			android:icon = "@drawable/ic_menu_manage"
+			android:title = "Tools" />
+		-->
+	</group>
+
+	<!--Another section in the sidebar-->
+	<item android:title = "정보">
+		<menu>
+			<item
+				android:id = "@+id/nav_credit"
+				android:title = "제작자" />
+				<!--android:icon = "@drawable/ic_menu_share"-->
+				<!-- credit icon -->
+		</menu>
+	</item>
+</menu>

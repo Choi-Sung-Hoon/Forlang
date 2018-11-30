@@ -1,0 +1,51 @@
+package com.example.csh.forlang;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+public class ViewPagerWord extends FragmentStatePagerAdapter
+{
+	private final int MAX_WORDS = 10;
+	private int wordsCount;
+	private ArrayList<String> wordList;
+	private ArrayList<FragmentWord> fragmentList;
+
+	public ViewPagerWord(FragmentManager fm, ArrayList<String> wordList)
+	{
+		super(fm);
+		this.wordList = wordList;
+		this.fragmentList = new ArrayList<>();
+
+		for(wordsCount = 0; wordsCount < MAX_WORDS; wordsCount++)
+		{
+			FragmentWord fragmentWord = new FragmentWord();
+			Bundle args = new Bundle();
+			args.putString("word", wordList.get(new Random().nextInt(wordList.size())).toString());
+			fragmentWord.setArguments(args);
+
+			fragmentList.add(fragmentWord);
+		}
+	}
+
+	@Override
+	public int getCount()
+	{
+		return wordsCount;
+	}
+
+	@Override
+	public Fragment getItem(int position)
+	{
+		return fragmentList.get(position);
+	}
+}
