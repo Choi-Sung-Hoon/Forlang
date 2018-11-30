@@ -19,10 +19,11 @@
 		<TextView
 			android:id = "@+id/tvWord"
 			android:layout_width = "wrap_content"
-			android:layout_height = "match_parent"
+			android:layout_height = "wrap_content"
 			android:gravity = "center_vertical"
 			android:text = "Test Word"
-			android:textSize = "32sp"
+			android:textSize = "36sp"
+			android:textStyle = "bold"
 			android:textColor = "@color/White"/>
 
 		<ImageButton
@@ -31,9 +32,9 @@
 			android:contentDescription = "Speaker image"
 			android:layout_width = "wrap_content"
 			android:layout_height = "wrap_content"
+			android:layout_gravity = "center_vertical"
 			android:layout_marginHorizontal = "5dp"
-			android:background = "@drawable/border_button"
-			android:gravity = "center_vertical">
+			android:background = "@drawable/border_button_speaker">
 		</ImageButton>
 	</LinearLayout>
 
@@ -44,7 +45,7 @@
 		android:layout_marginTop = "32dp"
 		android:layout_marginHorizontal = "16dp"
 		android:gravity = "center"
-		android:text = "Translated"
+		android:text = ""
 		android:textSize = "32sp"
 		android:textColor = "@color/White"/>
 
@@ -55,7 +56,7 @@
 		android:layout_marginTop = "32dp"
 		android:layout_marginHorizontal = "16dp"
 		android:gravity = "center"
-		android:text = "Translated"
+		android:text = ""
 		android:textSize = "32sp"
 		android:textColor = "@color/White"/>
 
@@ -66,8 +67,22 @@
 		android:layout_marginTop = "32dp"
 		android:layout_marginHorizontal = "16dp"
 		android:gravity = "center"
-		android:text = "Translated"
+		android:text = ""
 		android:textSize = "32sp"
 		android:textColor = "@color/White"/>
+
+	<Button
+		android:id = "@+id/button_add"
+		android:layout_width = "wrap_content"
+		android:layout_height = "wrap_content"
+		android:layout_marginTop = "64dp"
+		android:layout_marginHorizontal = "5dp"
+		android:layout_gravity = "center"
+		android:gravity = "center_vertical"
+		android:text = "단어장에 추가"
+		android:textSize = "24sp"
+		android:textColor = "@color/White"
+		android:background = "@drawable/selector_button"
+		style="?android:attr/borderlessButtonStyle"/>
 
 </LinearLayout>

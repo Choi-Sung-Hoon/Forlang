@@ -1,6 +1,7 @@
 package com.example.csh.forlang;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -62,7 +63,8 @@ public class Translation extends AsyncTask<String, Void, String>
 		}
 		catch (Exception e)
 		{
-			System.out.println(e);
+			Log.e(e.getClass().toString(), e.getMessage().toString());
+			e.printStackTrace();
 			return null;
 		}
 	}

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- selector가 눌렸을때-->
+	<item android:state_pressed="true" android:drawable="@drawable/border_button_pressed">
+		<shape
+			android:shape="rectangle">
+
+			<!-- view background color -->
+			<solid
+				android:color="@color/LightGrey">
+			</solid>
+
+			<!-- view border color and width -->
+			<stroke
+				android:width="3dp"
+				android:color="@color/White" >
+			</stroke>
+
+			<!-- If you want to add some padding -->
+			<padding
+				android:left="4dp"
+				android:top="4dp"
+				android:right="4dp"
+				android:bottom="4dp">
+			</padding>
+
+			<!-- Here is the corner radius -->
+			<corners
+				android:radius="10dp">
+			</corners>
+
+		</shape>
+	</item>
+
+	<!-- selector가 눌리지 않았을때-->
+	<item android:state_pressed="false" android:drawable="@drawable/border_button_normal">
+		<shape
+			android:shape="rectangle">
+
+			<!-- view background color -->
+			<solid
+				android:color="@color/DarkGray">
+			</solid>
+
+			<!-- view border color and width -->
+			<stroke
+				android:width="3dp"
+				android:color="@color/White" >
+			</stroke>
+
+			<!-- If you want to add some padding -->
+			<padding
+				android:left="4dp"
+				android:top="4dp"
+				android:right="4dp"
+				android:bottom="4dp">
+			</padding>
+
+			<!-- Here is the corner radius -->
+			<corners
+				android:radius="10dp">
+			</corners>
+
+		</shape>
+	</item>
+</selector>

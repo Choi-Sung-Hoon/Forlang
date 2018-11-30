@@ -56,26 +56,18 @@ public class FragmentWord extends Fragment implements View.OnClickListener, Text
 		ImageButton button = rootView.findViewById(R.id.button_speaker);
 		button.setOnClickListener(this);
 
-		// translate
-		try
+
+		TextView tvTranslated1 = rootView.findViewById(R.id.tvTranslated1);
+		tvTranslated1.setText(meanings[0]);
+		if(meanings.length >= 2)
 		{
-			TextView tvTranslated1 = rootView.findViewById(R.id.tvTranslated1);
-			tvTranslated1.setText(meanings[0]);
-			if(meanings.length >= 2)
-			{
-				TextView tvTranslated2 = rootView.findViewById(R.id.tvTranslated2);
-				tvTranslated2.setText(meanings[1]);
-			}
-			if(meanings.length >= 3)
-			{
-				TextView tvTranslated3 = rootView.findViewById(R.id.tvTranslated3);
-				tvTranslated3.setText(meanings[2]);
-			}
+			TextView tvTranslated2 = rootView.findViewById(R.id.tvTranslated2);
+			tvTranslated2.setText(meanings[1]);
 		}
-		catch(Exception e)
+		if(meanings.length >= 3)
 		{
-			Log.e(e.getClass().toString(), e.getMessage().toString());
-			e.printStackTrace();
+			TextView tvTranslated3 = rootView.findViewById(R.id.tvTranslated3);
+			tvTranslated3.setText(meanings[2]);
 		}
 
 		// Inflate the layout for this fragment

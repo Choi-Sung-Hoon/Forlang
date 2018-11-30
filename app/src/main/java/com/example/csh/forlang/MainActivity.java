@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 			for(String line = reader.readLine(); line != null; line = reader.readLine())
 			{
 				String word = line.split("\t", 2)[0];
-				String[] meanings = line.split("\t", 2)[1].split(", ", 3);
+				String[] meanings = line.split("\t", 2)[1].split(", ");
 
 				wordList.add(word);
 				meaningList.add(meanings);
