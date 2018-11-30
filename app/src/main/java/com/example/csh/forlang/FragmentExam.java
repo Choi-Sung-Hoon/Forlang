@@ -21,8 +21,8 @@ public class FragmentExam extends Fragment
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
+		System.out.println("commit test");
 		// Inflate the layout for this fragment
 		return inflater.inflate(R.layout.fragment_exam, container, false);
 	}
-
 }
