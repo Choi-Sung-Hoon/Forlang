@@ -25,6 +25,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity	implements NavigationView.OnNavigationItemSelectedListener
 {
 	private ArrayList<String> wordList;
+	private ArrayList<String[]> meaningList;
 	private ViewPager wordViewPager;
 	private FragmentStatePagerAdapter fragmentPagerAdapter;
 	private ViewPagerTransformer viewPagerTransformer;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 		addWordFile("words.txt");
 
 		// set the main fragment to FragmentWord
-		fragmentPagerAdapter = new ViewPagerWord(getSupportFragmentManager(), wordList);
+		fragmentPagerAdapter = new ViewPagerWord(getSupportFragmentManager(), wordList, meaningList);
 		viewPagerTransformer = new ViewPagerTransformer();
 		wordViewPager =  findViewById(R.id.wordViewPager);
 		wordViewPager.setPageTransformer(true, viewPagerTransformer);
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 
 			setTitle("단어암기");
 			wordViewPager.setPageTransformer(true, viewPagerTransformer);
-			fragmentPagerAdapter = new ViewPagerWord(getSupportFragmentManager(), wordList);
+			fragmentPagerAdapter = new ViewPagerWord(getSupportFragmentManager(), wordList, meaningList);
 			wordViewPager.setAdapter(fragmentPagerAdapter);
 		}
 		else if (id == R.id.nav_exam)
@@ -162,14 +163,21 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 	private void addWordFile(String filename)
 	{
 		wordList = new ArrayList<>();
+		meaningList = new ArrayList<>();
+
 		try
 		{
 			InputStream is = getAssets().open(filename);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
 			for(String line = reader.readLine(); line != null; line = reader.readLine())
-				if(line.length() > 2)
-					wordList.add(line);
+			{
+				String word = line.split("\t", 2)[0];
+				String[] meanings = line.split("\t", 2)[1].split(", ", 3);
+
+				wordList.add(word);
+				meaningList.add(meanings);
+			}
 
 			reader.close();
 			is.close();

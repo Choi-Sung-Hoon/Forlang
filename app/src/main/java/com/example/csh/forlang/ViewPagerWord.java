@@ -18,19 +18,23 @@ public class ViewPagerWord extends FragmentStatePagerAdapter
 	private final int MAX_WORDS = 10;
 	private int wordsCount;
 	private ArrayList<String> wordList;
+	private ArrayList<String[]> meaningList;
 	private ArrayList<FragmentWord> fragmentList;
 
-	public ViewPagerWord(FragmentManager fm, ArrayList<String> wordList)
+	public ViewPagerWord(FragmentManager fm, ArrayList<String> wordList, ArrayList<String[]> meaningList)
 	{
 		super(fm);
 		this.wordList = wordList;
 		this.fragmentList = new ArrayList<>();
+		this.meaningList = meaningList;
 
 		for(wordsCount = 0; wordsCount < MAX_WORDS; wordsCount++)
 		{
 			FragmentWord fragmentWord = new FragmentWord();
 			Bundle args = new Bundle();
-			args.putString("word", wordList.get(new Random().nextInt(wordList.size())).toString());
+			int index = new Random().nextInt(wordList.size());
+			args.putString("word", wordList.get(index).toString());
+			args.putStringArray("meanings", meaningList.get(index));
 			fragmentWord.setArguments(args);
 
 			fragmentList.add(fragmentWord);
