@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
 	xmlns:tools = "http://schemas.android.com/tools"
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent"
 	android:background = "@drawable/border_fragment"
+	android:orientation = "vertical"
 	tools:context = ".FragmentWord">
 
 	<!-- TODO: Update blank fragment layout -->
@@ -36,4 +37,25 @@
 		</ImageButton>
 	</LinearLayout>
 
-</FrameLayout>
+	<TextView
+		android:id = "@+id/translation1"
+		android:layout_width = "match_parent"
+		android:layout_height = "wrap_content"
+		android:layout_marginTop = "32dp"
+		android:layout_marginHorizontal = "16dp"
+		android:gravity = "center"
+		android:text = "Translated"
+		android:textSize = "32sp"
+		android:textColor = "@color/White"/>
+
+	<TextView
+		android:id = "@+id/translation2"
+		android:layout_width = "match_parent"
+		android:layout_height = "wrap_content"
+		android:layout_marginHorizontal = "16dp"
+		android:gravity = "center"
+		android:text = "Translated"
+		android:textSize = "32sp"
+		android:textColor = "@color/White"/>
+
+</LinearLayout>

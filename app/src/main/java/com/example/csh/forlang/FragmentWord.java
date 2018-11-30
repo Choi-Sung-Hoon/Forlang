@@ -59,13 +59,12 @@ public class FragmentWord extends Fragment implements View.OnClickListener, Text
 	@Override
 	public void onDestroy()
 	{
-		super.onDestroy();
-
 		if(tts != null)
 		{
 			tts.stop();
 			tts.shutdown();
 		}
+		super.onDestroy();
 	}
 
 	@Override
