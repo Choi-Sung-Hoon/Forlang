@@ -1,6 +1,8 @@
 package com.example.csh.forlang;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -53,9 +56,8 @@ public class FragmentWord extends Fragment implements View.OnClickListener, Text
 		tv.setText(word);
 		// set speaker button
 		tts = new TextToSpeech(getActivity(), this);
-		ImageButton button = rootView.findViewById(R.id.button_speaker);
-		button.setOnClickListener(this);
-
+		ImageButton buttonSpeaker = rootView.findViewById(R.id.button_speaker);
+		buttonSpeaker.setOnClickListener(this);
 
 		TextView tvTranslated1 = rootView.findViewById(R.id.tvTranslated1);
 		tvTranslated1.setText(meanings[0]);
@@ -69,6 +71,14 @@ public class FragmentWord extends Fragment implements View.OnClickListener, Text
 			TextView tvTranslated3 = rootView.findViewById(R.id.tvTranslated3);
 			tvTranslated3.setText(meanings[2]);
 		}
+
+		// set add button listener
+		Button buttonAdd = rootView.findViewById(R.id.button_add);
+		buttonAdd.setOnClickListener(this);
+
+		// set search button listener
+		Button buttonSearch = rootView.findViewById(R.id.button_search);
+		buttonSearch.setOnClickListener(this);
 
 		// Inflate the layout for this fragment
 		return rootView;
@@ -85,10 +95,22 @@ public class FragmentWord extends Fragment implements View.OnClickListener, Text
 		super.onDestroy();
 	}
 
+	// OnClickListener only for tts
 	@Override
 	public void onClick(View v)
 	{
-		tts.speak(word, TextToSpeech.QUEUE_FLUSH, null, null);
+		switch(v.getId())
+		{
+			case R.id.button_speaker:
+				tts.speak(word, TextToSpeech.QUEUE_FLUSH, null, null);
+				break;
+			case R.id.button_add:
+				break;
+			case R.id.button_search:
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://endic.naver.com/search.nhn?sLn=kr&isOnlyViewEE=N&query=" + word));
+				startActivity(intent);
+				break;
+		}
 	}
 
 	@Override

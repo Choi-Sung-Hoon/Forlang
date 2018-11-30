@@ -34,8 +34,7 @@
 			android:layout_height = "wrap_content"
 			android:layout_gravity = "center_vertical"
 			android:layout_marginHorizontal = "5dp"
-			android:background = "@drawable/border_button_speaker">
-		</ImageButton>
+			android:background = "@drawable/border_button_speaker"/>
 	</LinearLayout>
 
 	<TextView
@@ -73,13 +72,27 @@
 
 	<Button
 		android:id = "@+id/button_add"
-		android:layout_width = "wrap_content"
+		android:layout_width = "256dp"
 		android:layout_height = "wrap_content"
-		android:layout_marginTop = "64dp"
-		android:layout_marginHorizontal = "5dp"
+		android:layout_marginTop = "32dp"
+		android:layout_marginHorizontal = "10dp"
 		android:layout_gravity = "center"
-		android:gravity = "center_vertical"
+		android:gravity = "center"
 		android:text = "단어장에 추가"
+		android:textSize = "24sp"
+		android:textColor = "@color/White"
+		android:background = "@drawable/selector_button"
+		style="?android:attr/borderlessButtonStyle"/>
+
+	<Button
+		android:id = "@+id/button_search"
+		android:layout_width = "256dp"
+		android:layout_height = "wrap_content"
+		android:layout_marginTop = "16dp"
+		android:layout_marginHorizontal = "10dp"
+		android:layout_gravity = "center"
+		android:gravity = "center"
+		android:text = "인터넷에서 찾기"
 		android:textSize = "24sp"
 		android:textColor = "@color/White"
 		android:background = "@drawable/selector_button"
