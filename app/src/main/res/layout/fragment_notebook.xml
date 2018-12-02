@@ -4,21 +4,16 @@
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent"
 	android:orientation = "vertical"
+	android:background = "@color/White"
 	tools:context = ".FragmentNotebook">
 
-	<!-- simple list view -->
 	<ListView
-		android:id = "@+id/list"
-		android:layout_width = "match_parent"
-		android:layout_height = "match_parent"/>
-
-	<TextView
-		android:id = "@android:id/empty"
+		android:id = "@+id/list_view"
 		android:layout_width = "match_parent"
 		android:layout_height = "match_parent"
-		android:text = "No data was found."
-		android:textSize = "20dp"
-		android:gravity = "center"/>
-	-->
+		android:layout_margin = "10dp"
+		android:background = "@color/LightSteelBlue"
+		android:soundEffectsEnabled = "true"
+		android:smoothScrollbar="true"/>
 
 </LinearLayout>

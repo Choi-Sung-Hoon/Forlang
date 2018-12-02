@@ -118,6 +118,7 @@ public class FragmentWord extends Fragment implements View.OnClickListener, Text
 					values.put("meaning2", meanings[1]);
 				if(meanings.length >= 3)
 					values.put("meaning3", meanings[2]);
+				values.put("examNo", 0);
 
 				cr.insert(uri, values);
 				break;

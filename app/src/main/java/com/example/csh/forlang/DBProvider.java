@@ -101,22 +101,7 @@ public class DBProvider extends ContentProvider
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder)
 	{
-		/*
-		String sql = "select * from MyWords";
-		if(matcher.match(uri) == GETONE)
-		{
-			sql += " WHERE examNo ='";
-			sql += uri.getPathSegments().get(1);
-			sql += "'";
-		}
-		sql += ";";
-
-		Cursor cursor = mDB.rawQuery(sql, null);
-		return cursor;
-		*/
-		//Cursor cursor = mDB.query("MyWords", projection, selection, selectionArgs, null, null, sortOrder);
-		//cursor.moveToFirst();
-		Cursor cursor = mDB.rawQuery("select * from MyWords", null);
+		Cursor cursor = mDB.query("MyWords", projection, selection, selectionArgs, null, null, sortOrder);
 		return cursor;
 	}
 }
