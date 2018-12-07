@@ -8,7 +8,6 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
 public class DBProvider extends ContentProvider
@@ -73,7 +72,7 @@ public class DBProvider extends ContentProvider
 	@Override
 	public Uri insert(Uri uri, ContentValues values)
 	{
-		long row = mDB.insertWithOnConflict("MyWords", null, values, SQLiteDatabase.CONFLICT_REPLACE);
+		long row = mDB.insertWithOnConflict("MyWords", null, values, SQLiteDatabase.CONFLICT_IGNORE);
 
 		if(row > 0)
 		{

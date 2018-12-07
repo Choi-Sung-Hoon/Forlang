@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -26,7 +27,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Locale;
+
+import static android.widget.Toast.makeText;
 
 
 /**
@@ -105,8 +109,10 @@ public class FragmentWord extends Fragment implements View.OnClickListener, Text
 		switch(v.getId())
 		{
 			case R.id.button_speaker:
+			{
 				tts.speak(word, TextToSpeech.QUEUE_FLUSH, null, null);
 				break;
+			}
 			case R.id.button_add:
 			{
 				ContentResolver cr = v.getContext().getContentResolver();
@@ -121,13 +127,18 @@ public class FragmentWord extends Fragment implements View.OnClickListener, Text
 					values.put("meaning3", meanings[2]);
 				values.put("examNo", 0);
 
-				cr.insert(uri, values);
+				if(cr.insert(uri, values) != null)
+					makeText(getActivity(), "단어장에 추가하였습니다.", Toast.LENGTH_SHORT).show();
+				else
+					makeText(getActivity(), "이미 추가한 단어입니다.", Toast.LENGTH_SHORT).show();
 				break;
 			}
 			case R.id.button_search:
+			{
 				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://endic.naver.com/search.nhn?sLn=kr&isOnlyViewEE=N&query=" + word));
 				startActivity(intent);
 				break;
+			}
 		}
 	}
 
