@@ -34,7 +34,7 @@
 			android:layout_height = "wrap_content"
 			android:layout_gravity = "center_vertical"
 			android:layout_marginHorizontal = "5dp"
-			android:background = "@drawable/border_button_speaker"/>
+			android:background = "@drawable/selector_button_speaker"/>
 	</LinearLayout>
 
 	<TextView
@@ -81,7 +81,7 @@
 		android:text = "단어장에 추가"
 		android:textSize = "24sp"
 		android:textColor = "@color/White"
-		android:background = "@drawable/selector_button"
+		android:background = "@drawable/selector_button_normal"
 		style="?android:attr/borderlessButtonStyle"/>
 
 	<Button
@@ -95,7 +95,7 @@
 		android:text = "인터넷에서 찾기"
 		android:textSize = "24sp"
 		android:textColor = "@color/White"
-		android:background = "@drawable/selector_button"
+		android:background = "@drawable/selector_button_normal"
 		style="?android:attr/borderlessButtonStyle"/>
 
 </LinearLayout>
