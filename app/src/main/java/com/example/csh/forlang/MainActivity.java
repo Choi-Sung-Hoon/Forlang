@@ -1,5 +1,6 @@
 package com.example.csh.forlang;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.design.widget.NavigationView;
@@ -161,7 +162,11 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 		}
 		else if (id == R.id.nav_developer)
 		{
-
+			AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+			dialog.setIcon(R.drawable.dialog_icon_knu);
+			dialog.setTitle("경북대학교");
+			dialog.setMessage("컴퓨터학부 2014105091 최성훈");
+			dialog.show();
 		}
 
 		DrawerLayout drawer = findViewById(R.id.drawer_layout);
