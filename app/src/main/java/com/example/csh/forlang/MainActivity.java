@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,13 +30,14 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 	private ViewPager wordViewPager;
 	private FragmentStatePagerAdapter fragmentPagerAdapter;
 	private ViewPagerTransformer viewPagerTransformer;
-	private TextToSpeech tts;
+	private MenuItem action_item_delete;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
 		// set toolbar
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
@@ -43,7 +45,6 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 		DrawerLayout drawer = findViewById(R.id.drawer_layout);
 		// set toolbar
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-		//ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 		drawer.addDrawerListener(toggle);
 		toggle.syncState();
 
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 		// set the main fragment to FragmentWord
 		fragmentPagerAdapter = new ViewPagerWord(getSupportFragmentManager(), wordList, meaningList);
 		viewPagerTransformer = new ViewPagerTransformer();
-		wordViewPager =  findViewById(R.id.wordViewPager);
+		wordViewPager = findViewById(R.id.wordViewPager);
 		wordViewPager.setPageTransformer(true, viewPagerTransformer);
 		wordViewPager.setAdapter(fragmentPagerAdapter);
 	}
@@ -79,6 +80,9 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		action_item_delete = menu.getItem(0);
+		action_item_delete.setVisible(false);
 		return true;
 	}
 
@@ -88,6 +92,14 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+
+		//noinspection SimplifiableIfStatement
+		if (id == R.id.action_delete)
+		{
+			return true;
+		}
+
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -103,6 +115,12 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 		if(id != R.id.nav_developer)
 			for(Fragment f : fragmentManager.getFragments())
 				fragmentManager.beginTransaction().remove(f).commit();
+
+		// hide & show action bar item
+		if(id == R.id.nav_word)
+			action_item_delete.setVisible(false);
+		else if(id != R.id.nav_developer)
+			action_item_delete.setVisible(true);
 
 		if (id == R.id.nav_word)
 		{

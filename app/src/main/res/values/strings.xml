@@ -5,7 +5,7 @@
 	<string name = "nav_header_title">한조각 영단어</string>
 	<string name = "nav_header_subtitle">경북대학교 컴퓨터학부</string>
 	<string name = "nav_header_desc">Navigation header icon</string>
-	<string name = "action_settings">설정</string>
+	<string name = "action_delete">삭제</string>
 	<string name = "title_activity_view_pager_word">ViewPagerWord</string>
 	<string name = "section_format">Hello World from section: %1$d</string>
 
