@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 		FragmentManager fragmentManager = getSupportFragmentManager();
 
 		// remove all fragments in the container
-		if(id != R.id.nav_credit)
+		if(id != R.id.nav_developer)
 			for(Fragment f : fragmentManager.getFragments())
 				fragmentManager.beginTransaction().remove(f).commit();
 
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 			FragmentNotebook fragmentNotebook = new FragmentNotebook();
 			fragmentManager.beginTransaction().replace(R.id.fragment_container, fragmentNotebook).commit();
 		}
-		else if (id == R.id.nav_credit)
+		else if (id == R.id.nav_developer)
 		{
 
 		}

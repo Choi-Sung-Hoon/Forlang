@@ -56,6 +56,7 @@ public class FragmentWord extends Fragment implements View.OnClickListener, Text
 		// set TextView
 		TextView tv = rootView.findViewById(R.id.tvWord);
 		tv.setText(word);
+
 		// set speaker button
 		tts = new TextToSpeech(getActivity(), this);
 		ImageButton buttonSpeaker = rootView.findViewById(R.id.button_speaker);

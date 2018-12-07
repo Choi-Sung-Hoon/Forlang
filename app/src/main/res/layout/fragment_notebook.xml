@@ -4,15 +4,14 @@
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent"
 	android:orientation = "vertical"
-	android:background = "@color/White"
+	android:background = "@drawable/border_fragment_word"
 	tools:context = ".FragmentNotebook">
 
 	<ListView
 		android:id = "@+id/list_view"
 		android:layout_width = "match_parent"
 		android:layout_height = "match_parent"
-		android:layout_margin = "10dp"
-		android:background = "@color/LightSteelBlue"
+		android:layout_margin = "15dp"
 		android:soundEffectsEnabled = "true"
 		android:smoothScrollbar="true"/>
 

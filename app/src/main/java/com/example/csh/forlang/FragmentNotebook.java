@@ -2,22 +2,32 @@ package com.example.csh.forlang;
 
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.CursorTreeAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorTreeAdapter;
+import android.widget.TextView;
+
+import java.util.Locale;
 
 
 /**
@@ -25,9 +35,23 @@ import android.widget.SimpleCursorTreeAdapter;
  */
 public class FragmentNotebook extends Fragment
 {
+	WordListAdapter adapter;
+
 	public FragmentNotebook()
 	{
 		// Required empty public constructor
+	}
+
+	@Override
+	public void onDestroy()
+	{
+		TextToSpeech tts = adapter.getTTS();
+		if(tts != null)
+		{
+			tts.stop();
+			tts.shutdown();
+		}
+		super.onDestroy();
 	}
 
 	@Override
@@ -41,8 +65,7 @@ public class FragmentNotebook extends Fragment
 		Uri uri = Uri.parse("content://forlang.provider/MyWords");
 
 		Cursor cursor = cr.query(uri, new String[]{"_id", "word", "meaning1", "meaning2", "meaning3"}, "examNo=?", new String[]{"0"}, null);
-
-		ListAdapter adapter = new SimpleCursorAdapter(
+		adapter = new WordListAdapter(
 				context,
 				R.layout.list_item,
 				cursor,

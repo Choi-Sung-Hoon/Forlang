@@ -22,10 +22,9 @@
 	<item android:title = "정보">
 		<menu>
 			<item
-				android:id = "@+id/nav_credit"
-				android:title = "제작자" />
-				<!--android:icon = "@drawable/ic_menu_share"-->
-				<!-- credit icon -->
+				android:id = "@+id/nav_developer"
+				android:icon = "@drawable/nav_icon_developer"
+				android:title = "제작자"/>
 		</menu>
 	</item>
 </menu>
