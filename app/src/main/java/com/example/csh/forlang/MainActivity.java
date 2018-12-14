@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 	private ViewPager wordViewPager;
 	private FragmentStatePagerAdapter fragmentPagerAdapter;
 	private ViewPagerTransformer viewPagerTransformer;
-	private MenuItem action_item_delete;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -82,8 +81,6 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		action_item_delete = menu.getItem(0);
-		action_item_delete.setVisible(false);
 		return true;
 	}
 
@@ -93,13 +90,6 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_delete)
-		{
-			return true;
-		}
 
 		return super.onOptionsItemSelected(item);
 	}
@@ -115,12 +105,6 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 		if(id != R.id.nav_developer)
 			for(Fragment f : fragmentManager.getFragments())
 				fragmentManager.beginTransaction().remove(f).commit();
-
-		// hide & show action bar item
-		if(id == R.id.nav_word)
-			action_item_delete.setVisible(false);
-		else if(id != R.id.nav_developer)
-			action_item_delete.setVisible(true);
 
 		if (id == R.id.nav_word)
 		{
