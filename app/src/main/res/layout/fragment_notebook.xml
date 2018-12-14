@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android = "http://schemas.android.com/apk/res/android"
 	xmlns:tools = "http://schemas.android.com/tools"
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent"
@@ -13,6 +13,18 @@
 		android:layout_height = "match_parent"
 		android:layout_margin = "15dp"
 		android:soundEffectsEnabled = "true"
-		android:smoothScrollbar="true"/>
+		android:smoothScrollbar="true">
+	</ListView>
 
-</LinearLayout>
+	<TextView
+		android:id="@+id/list_empty"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:text="저장된 단어가 없습니다."
+		android:textSize="15dp"
+		android:textColor = "@color/White"
+		android:gravity = "center"
+		android:visibility = "gone"/>
+
+</FrameLayout>

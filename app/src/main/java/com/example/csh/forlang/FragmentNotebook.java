@@ -74,6 +74,7 @@ public class FragmentNotebook extends Fragment
 				new int[]{R.id.tvWord, R.id.tvMeaning1, R.id.tvMeaning2, R.id.tvMeaning3}, 0);
 
 		ListView listView = rootView.findViewById(R.id.list_view);
+		listView.setEmptyView(rootView.findViewById(R.id.list_empty));
 		listView.setAdapter(adapter);
 
 		return rootView;

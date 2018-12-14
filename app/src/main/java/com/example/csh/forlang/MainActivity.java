@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 		return super.onOptionsItemSelected(item);
 	}
 
-	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
 	public boolean onNavigationItemSelected(MenuItem item)
 	{
@@ -166,6 +165,7 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 			dialog.setIcon(R.drawable.dialog_icon_knu);
 			dialog.setTitle("경북대학교");
 			dialog.setMessage("컴퓨터학부 2014105091 최성훈");
+			dialog.setPositiveButton("확인", null);
 			dialog.show();
 		}
 

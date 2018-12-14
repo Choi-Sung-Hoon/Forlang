@@ -18,12 +18,17 @@ import java.util.Locale;
 
 public class WordListAdapter extends SimpleCursorAdapter implements View.OnClickListener, TextToSpeech.OnInitListener
 {
+	private Context context;
+	private ContentResolver cr;
 	private TextToSpeech tts;
 
 	public WordListAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags)
 	{
 		super(context, layout, c, from, to, flags);
 
+		// simple list view
+		this.context = context;
+		this.cr = context.getContentResolver();
 		tts = new TextToSpeech(context, this);
 	}
 
