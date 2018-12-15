@@ -94,12 +94,12 @@ public class FragmentWord extends Fragment implements View.OnClickListener, Text
 	@Override
 	public void onDestroy()
 	{
+		super.onDestroy();
 		if(tts != null)
 		{
 			tts.stop();
 			tts.shutdown();
 		}
-		super.onDestroy();
 	}
 
 	// OnClickListener only for tts
@@ -148,7 +148,7 @@ public class FragmentWord extends Fragment implements View.OnClickListener, Text
 		if(status == TextToSpeech.SUCCESS)
 		{
 			int result = tts.setLanguage(Locale.US);
-			tts.setSpeechRate(0.95f);
+			tts.setSpeechRate(1.0f);
 
 			if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED)
 				Log.i("TTS", "Language is not supported");

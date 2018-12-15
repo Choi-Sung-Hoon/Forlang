@@ -95,13 +95,13 @@ public class DBProvider extends ContentProvider
 	{
 		// Implement this to handle requests to delete one or more rows.
 		//throw new UnsupportedOperationException("Not yet implemented");
-		return mDB.delete("MyWords", selection, selectionArgs);
+		return mDB.delete(uri.getLastPathSegment(), selection, selectionArgs);
 	}
 
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder)
 	{
-		Cursor cursor = mDB.query("MyWords", projection, selection, selectionArgs, null, null, sortOrder);
+		Cursor cursor = mDB.query(uri.getLastPathSegment(), projection, selection, selectionArgs, null, null, sortOrder);
 		return cursor;
 	}
 }

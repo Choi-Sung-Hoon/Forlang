@@ -34,25 +34,16 @@ import java.util.Locale;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentNotebook extends Fragment
+public class FragmentNotebook extends Fragment implements SwipeDismissListViewTouchListener.DismissCallbacks
 {
-	WordListAdapter adapter;
+	private WordListAdapter adapter;
+	private Context context;
+	private ContentResolver cr;
+	private Uri uri;
 
 	public FragmentNotebook()
 	{
 		// Required empty public constructor
-	}
-
-	@Override
-	public void onDestroy()
-	{
-		TextToSpeech tts = adapter.getTTS();
-		if(tts != null)
-		{
-			tts.stop();
-			tts.shutdown();
-		}
-		super.onDestroy();
 	}
 
 	@Override
@@ -61,9 +52,9 @@ public class FragmentNotebook extends Fragment
 		View rootView = inflater.inflate(R.layout.fragment_notebook, container, false);
 
 		// simple list view
-		Context context = container.getContext();
-		ContentResolver cr = context.getContentResolver();
-		Uri uri = Uri.parse("content://forlang.provider/MyWords");
+		context = container.getContext();
+		cr = context.getContentResolver();
+		uri = Uri.parse("content://forlang.provider/MyWords");
 
 		Cursor cursor = cr.query(uri, new String[]{"_id", "word", "meaning1", "meaning2", "meaning3"}, "examNo=?", new String[]{"0"}, null);
 		adapter = new WordListAdapter(
@@ -76,7 +67,47 @@ public class FragmentNotebook extends Fragment
 		ListView listView = rootView.findViewById(R.id.list_view);
 		listView.setEmptyView(rootView.findViewById(R.id.list_empty));
 		listView.setAdapter(adapter);
+		SwipeDismissListViewTouchListener touchListener = new SwipeDismissListViewTouchListener(listView, this);
+		listView.setOnTouchListener(touchListener);
+		// Setting this scroll listener is required to ensure that during ListView scrolling,
+		// we don't look for swipes.
+		listView.setOnScrollListener(touchListener.makeScrollListener());
 
 		return rootView;
+	}
+
+	@Override
+	public void onDestroy()
+	{
+		super.onDestroy();
+		if(adapter != null)
+		{
+			TextToSpeech tts = adapter.getTTS();
+			if(tts != null)
+			{
+				tts.stop();
+				tts.shutdown();
+			}
+		}
+	}
+
+	@Override
+	public boolean canDismiss(int position)
+	{
+		return true;
+	}
+
+	@Override
+	public void onDismiss(ListView listView, int[] reverseSortedPositions)
+	{
+		Cursor c;
+		for (int position : reverseSortedPositions)
+		{
+			c = (Cursor) adapter.getItem(position);
+			String word = c.getString(1);
+			cr.delete(uri, "word=?", new String[]{word});
+		}
+		c = cr.query(uri, new String[]{"_id", "word", "meaning1", "meaning2", "meaning3"}, "examNo=?", new String[]{"0"}, null);
+		adapter.changeCursor(c);
 	}
 }

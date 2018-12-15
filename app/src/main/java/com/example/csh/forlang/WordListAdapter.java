@@ -26,7 +26,6 @@ public class WordListAdapter extends SimpleCursorAdapter implements View.OnClick
 	{
 		super(context, layout, c, from, to, flags);
 
-		// simple list view
 		this.context = context;
 		this.cr = context.getContentResolver();
 		tts = new TextToSpeech(context, this);
@@ -71,7 +70,7 @@ public class WordListAdapter extends SimpleCursorAdapter implements View.OnClick
 		if(status == TextToSpeech.SUCCESS)
 		{
 			int result = tts.setLanguage(Locale.US);
-			tts.setSpeechRate(0.95f);
+			tts.setSpeechRate(1.0f);
 
 			if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED)
 				Log.i("TTS", "Language is not supported");
