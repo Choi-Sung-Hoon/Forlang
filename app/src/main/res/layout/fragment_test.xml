@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+	xmlns:tools = "http://schemas.android.com/tools"
+	android:layout_width = "match_parent"
+	android:layout_height = "match_parent"
+	android:background = "@drawable/border_fragment_word"
+	android:orientation = "vertical"
+	tools:context = ".FragmentTest">
+
+	<!-- TODO: Update blank fragment layout -->
+	<LinearLayout
+		android:layout_width = "match_parent"
+		android:layout_height = "wrap_content"
+		android:layout_marginTop = "64dp"
+		android:layout_marginHorizontal = "16dp"
+		android:gravity = "center_horizontal"
+		android:orientation = "horizontal">
+
+		<ImageButton
+			android:id = "@+id/button_speaker"
+			android:src = "@drawable/content_icon_speaker"
+			android:contentDescription = "Speaker image"
+			android:layout_width = "wrap_content"
+			android:layout_height = "wrap_content"
+			android:layout_gravity = "center_vertical"
+			android:layout_marginHorizontal = "5dp"
+			android:background = "@drawable/selector_button_speaker"/>
+	</LinearLayout>
+
+	<TextView
+		android:id = "@+id/tvTranslated1"
+		android:layout_width = "match_parent"
+		android:layout_height = "wrap_content"
+		android:layout_marginTop = "32dp"
+		android:layout_marginHorizontal = "16dp"
+		android:gravity = "center"
+		android:textSize = "32sp"
+		android:textColor = "@color/White"/>
+
+	<TextView
+		android:id = "@+id/tvTranslated2"
+		android:layout_width = "match_parent"
+		android:layout_height = "wrap_content"
+		android:layout_marginTop = "32dp"
+		android:layout_marginHorizontal = "16dp"
+		android:gravity = "center"
+		android:textSize = "32sp"
+		android:textColor = "@color/White"/>
+
+	<TextView
+		android:id = "@+id/tvTranslated3"
+		android:layout_width = "match_parent"
+		android:layout_height = "wrap_content"
+		android:layout_marginTop = "32dp"
+		android:layout_marginHorizontal = "16dp"
+		android:gravity = "center"
+		android:textSize = "32sp"
+		android:textColor = "@color/White"/>
+
+	<Button
+		android:id = "@+id/button_add"
+		android:layout_width = "256dp"
+		android:layout_height = "wrap_content"
+		android:layout_marginTop = "32dp"
+		android:layout_marginHorizontal = "10dp"
+		android:layout_gravity = "center"
+		android:gravity = "center"
+		android:text = "단어장에 추가"
+		android:textSize = "24sp"
+		android:textColor = "@color/White"
+		android:background = "@drawable/selector_button_normal"
+		style="?android:attr/borderlessButtonStyle"/>
+
+	<Button
+		android:id = "@+id/button_submit"
+		android:layout_width = "256dp"
+		android:layout_height = "wrap_content"
+		android:layout_marginTop = "16dp"
+		android:layout_marginHorizontal = "10dp"
+		android:layout_gravity = "center"
+		android:gravity = "center"
+		android:text = "제출"
+		android:textSize = "24sp"
+		android:textColor = "@color/White"
+		android:background = "@drawable/selector_button_normal"
+		style="?android:attr/borderlessButtonStyle"/>
+
+</LinearLayout>

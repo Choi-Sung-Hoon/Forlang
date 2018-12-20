@@ -26,8 +26,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity	implements NavigationView.OnNavigationItemSelectedListener
 {
-	private ArrayList<String> wordList;
-	private ArrayList<String[]> meaningList;
+	private WordFile wordFile;
 	private ViewPager wordViewPager;
 	private FragmentStatePagerAdapter fragmentPagerAdapter;
 	private ViewPagerTransformer viewPagerTransformer;
@@ -52,10 +51,10 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 		navigationView.setNavigationItemSelectedListener(this);
 
 		// add text asset
-		addWordFile("words.txt");
+		wordFile = new WordFile(this, "words.txt");
 
 		// set the main fragment to FragmentWord
-		fragmentPagerAdapter = new ViewPagerWord(getSupportFragmentManager(), wordList, meaningList);
+		fragmentPagerAdapter = new ViewPagerWord(getSupportFragmentManager(), wordFile.getWordList(), wordFile.getMeaningList());
 		viewPagerTransformer = new ViewPagerTransformer();
 		wordViewPager = findViewById(R.id.wordViewPager);
 		wordViewPager.setPageTransformer(true, viewPagerTransformer);
@@ -116,7 +115,7 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 
 			setTitle("단어암기");
 			wordViewPager.setPageTransformer(true, viewPagerTransformer);
-			fragmentPagerAdapter = new ViewPagerWord(getSupportFragmentManager(), wordList, meaningList);
+			fragmentPagerAdapter = new ViewPagerWord(getSupportFragmentManager(), wordFile.getWordList(), wordFile.getMeaningList());
 			wordViewPager.setAdapter(fragmentPagerAdapter);
 		}
 		else if (id == R.id.nav_exam)
@@ -129,6 +128,9 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 
 			setTitle("시험");
 			FragmentExam fragmentExam = new FragmentExam();
+			Bundle args = new Bundle();
+			args.putSerializable("wordFile", wordFile);
+			fragmentExam.setArguments(args);
 			fragmentManager.beginTransaction().replace(R.id.fragment_container, fragmentExam).commit();
 		}
 		else if (id == R.id.nav_notebook)
@@ -156,35 +158,5 @@ public class MainActivity extends AppCompatActivity	implements NavigationView.On
 		DrawerLayout drawer = findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
-	}
-
-	private void addWordFile(String filename)
-	{
-		wordList = new ArrayList<>();
-		meaningList = new ArrayList<>();
-
-		try
-		{
-			InputStream is = getAssets().open(filename);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-
-			for(String line = reader.readLine(); line != null; line = reader.readLine())
-			{
-				String word = line.split("\t", 2)[0];
-				String[] meanings = line.split("\t", 2)[1].split(", ");
-
-				wordList.add(word);
-				meaningList.add(meanings);
-			}
-
-			reader.close();
-			is.close();
-		}
-		catch(IOException e)
-		{
-			Log.e(e.getClass().toString(), e.getMessage().toString());
-			e.printStackTrace();
-			return;
-		}
 	}
 }

@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +27,7 @@ public class FragmentExam extends Fragment implements SwipeDismissListViewTouchL
 	private Context context;
 	private ContentResolver cr;
 	private Uri uri;
+	private WordFile wordFile;
 
 	public FragmentExam()
 	{
@@ -56,6 +59,10 @@ public class FragmentExam extends Fragment implements SwipeDismissListViewTouchL
 		// Setting this scroll listener is required to ensure that during ListView scrolling,
 		// we don't look for swipes.
 		listView.setOnScrollListener(touchListener.makeScrollListener());
+
+		// read word file
+		Bundle args = getArguments();
+		wordFile = (WordFile) args.getSerializable("wordFile");
 
 		// set add button listener
 		Button buttonAdd = rootView.findViewById(R.id.button_exam);
@@ -102,5 +109,11 @@ public class FragmentExam extends Fragment implements SwipeDismissListViewTouchL
 	@Override
 	public void onClick(View v)
 	{
+		FragmentTest fragmentTest = new FragmentTest();
+		Bundle args = new Bundle();
+		args.putSerializable("wordFile", wordFile);
+		fragmentTest.setArguments(args);
+
+		getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragmentTest).commit();
 	}
 }

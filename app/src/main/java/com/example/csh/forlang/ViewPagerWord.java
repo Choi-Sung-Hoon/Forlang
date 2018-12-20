@@ -25,8 +25,8 @@ public class ViewPagerWord extends FragmentStatePagerAdapter
 	{
 		super(fm);
 		this.wordList = wordList;
-		this.fragmentList = new ArrayList<>();
 		this.meaningList = meaningList;
+		this.fragmentList = new ArrayList<>();
 
 		for(wordsCount = 0; wordsCount < MAX_WORDS; wordsCount++)
 		{
