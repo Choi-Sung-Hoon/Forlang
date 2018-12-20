@@ -34,7 +34,7 @@ public class DBProvider extends ContentProvider
 
 		public void onCreate(SQLiteDatabase db)
 		{
-			db.execSQL("create table if not exists MyWords(_id int primary key, word text unique, meaning1 text, meaning2 text, meaning3 text, examNo int);");
+			db.execSQL("create table if not exists MyWords(_id int primary key, word text unique, meaning1 text, meaning2 text, meaning3 text, examNo int, correct int);");
 		}
 
 		public void onUpgrade(SQLiteDatabase db, int oldVer, int newVer)

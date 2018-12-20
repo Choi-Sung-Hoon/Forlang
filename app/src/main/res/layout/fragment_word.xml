@@ -44,7 +44,6 @@
 		android:layout_marginTop = "32dp"
 		android:layout_marginHorizontal = "16dp"
 		android:gravity = "center"
-		android:text = ""
 		android:textSize = "32sp"
 		android:textColor = "@color/White"/>
 
@@ -55,7 +54,6 @@
 		android:layout_marginTop = "32dp"
 		android:layout_marginHorizontal = "16dp"
 		android:gravity = "center"
-		android:text = ""
 		android:textSize = "32sp"
 		android:textColor = "@color/White"/>
 
@@ -66,7 +64,6 @@
 		android:layout_marginTop = "32dp"
 		android:layout_marginHorizontal = "16dp"
 		android:gravity = "center"
-		android:text = ""
 		android:textSize = "32sp"
 		android:textColor = "@color/White"/>
 

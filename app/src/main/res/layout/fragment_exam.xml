@@ -1,14 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
 	xmlns:tools = "http://schemas.android.com/tools"
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent"
+	android:background = "@drawable/border_fragment_word"
+	android:orientation = "vertical"
+	android:weightSum="20"
 	tools:context = ".FragmentExam">
 
-	<!-- TODO: Update blank fragment layout -->
-	<TextView
+	<LinearLayout
 		android:layout_width = "match_parent"
-		android:layout_height = "match_parent"
-		android:text = "Exam fragment" />
+		android:layout_height = "256dp"
+		android:layout_margin = "15dp"
+		android:layout_weight="19"
+		android:minHeight= "256dp"
+		android:orientation = "vertical"
+		android:gravity="center">
 
-</FrameLayout>
+		<ListView
+			android:id = "@+id/list_exam"
+			android:layout_width = "match_parent"
+			android:layout_height="match_parent"
+			android:smoothScrollbar = "true"
+			android:soundEffectsEnabled = "true">
+		</ListView>
+
+		<TextView
+			android:id="@+id/list_empty"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:gravity = "center"
+			android:text="저장된 시험이 없습니다."
+			android:textSize="15dp"
+			android:textColor = "@color/White"
+			android:visibility = "gone"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width = "match_parent"
+		android:layout_height = "wrap_content"
+		android:layout_weight="1">
+
+		<Button
+			android:id = "@+id/button_exam"
+			android:layout_width = "match_parent"
+			android:layout_height = "wrap_content"
+			android:layout_marginHorizontal = "10dp"
+			android:layout_gravity = "center"
+			android:gravity = "center"
+			android:text = "시험 응시"
+			android:textSize = "24sp"
+			android:textColor = "@color/White"
+			android:background = "@drawable/selector_button_normal"
+			style="?android:attr/borderlessButtonStyle"/>
+
+	</LinearLayout>
+
+</LinearLayout>

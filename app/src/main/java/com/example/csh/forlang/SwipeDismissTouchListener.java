@@ -255,6 +255,7 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
 
         ValueAnimator animator = ValueAnimator.ofInt(originalHeight, 1).setDuration(mAnimationTime);
 
+
         animator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
