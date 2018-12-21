@@ -30,11 +30,12 @@ public class DBProvider extends ContentProvider
 		public DBHelper(Context context)
 		{
 			super(context, "MyWords.db", null, 1);
+			//context.deleteDatabase("MyWords.db");
 		}
 
 		public void onCreate(SQLiteDatabase db)
 		{
-			db.execSQL("create table if not exists MyWords(_id int primary key, word text unique, meaning1 text, meaning2 text, meaning3 text, examNo int, correct int);");
+			db.execSQL("create table if not exists MyWords(_id int primary key, word text unique, meaning1 text, meaning2 text, meaning3 text, examNo int, correct int)");
 		}
 
 		public void onUpgrade(SQLiteDatabase db, int oldVer, int newVer)

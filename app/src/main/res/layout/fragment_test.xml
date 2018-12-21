@@ -3,7 +3,7 @@
 	xmlns:tools = "http://schemas.android.com/tools"
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent"
-	android:background = "@drawable/border_fragment_word"
+	android:background = "@drawable/border_fragment_test"
 	android:orientation = "vertical"
 	tools:context = ".FragmentTest">
 
@@ -15,6 +15,16 @@
 		android:layout_marginHorizontal = "16dp"
 		android:gravity = "center_horizontal"
 		android:orientation = "horizontal">
+
+		<TextView
+			android:id = "@+id/tvWord"
+			android:layout_width = "wrap_content"
+			android:layout_height = "wrap_content"
+			android:gravity = "center_vertical"
+			android:text = "Test Word"
+			android:textSize = "36sp"
+			android:textStyle = "bold"
+			android:textColor = "@color/White"/>
 
 		<ImageButton
 			android:id = "@+id/button_speaker"
@@ -57,19 +67,18 @@
 		android:textSize = "32sp"
 		android:textColor = "@color/White"/>
 
-	<Button
-		android:id = "@+id/button_add"
+	<EditText
+		android:id = "@+id/edit_text"
 		android:layout_width = "256dp"
 		android:layout_height = "wrap_content"
 		android:layout_marginTop = "32dp"
 		android:layout_marginHorizontal = "10dp"
 		android:layout_gravity = "center"
 		android:gravity = "center"
-		android:text = "단어장에 추가"
-		android:textSize = "24sp"
-		android:textColor = "@color/White"
-		android:background = "@drawable/selector_button_normal"
-		style="?android:attr/borderlessButtonStyle"/>
+		android:textSize= "36sp"
+		android:textColor = "@color/GreenYellow"
+		android:maxLength = "32"
+		android:inputType="text|textNoSuggestions"/>
 
 	<Button
 		android:id = "@+id/button_submit"

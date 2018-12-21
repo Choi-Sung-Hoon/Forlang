@@ -1,11 +1,7 @@
 package com.example.csh.forlang;
 
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
@@ -18,16 +14,12 @@ import java.util.Locale;
 
 public class WordListAdapter extends SimpleCursorAdapter implements View.OnClickListener, TextToSpeech.OnInitListener
 {
-	private Context context;
-	private ContentResolver cr;
 	private TextToSpeech tts;
 
 	public WordListAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags)
 	{
 		super(context, layout, c, from, to, flags);
 
-		this.context = context;
-		this.cr = context.getContentResolver();
 		tts = new TextToSpeech(context, this);
 	}
 
@@ -35,10 +27,6 @@ public class WordListAdapter extends SimpleCursorAdapter implements View.OnClick
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
 		View itemView =  super.getView(position, convertView, parent);
-
-		// word
-		TextView tvWord = itemView.findViewById(R.id.tvWord);
-		String word = tvWord.getText().toString();
 
 		// speaker button
 		ImageButton buttonSpeaker = itemView.findViewById(R.id.button_speaker);

@@ -28,6 +28,9 @@ public class FragmentExam extends Fragment implements SwipeDismissListViewTouchL
 	private ContentResolver cr;
 	private Uri uri;
 	private WordFile wordFile;
+	private ArrayList<Integer> wordList;
+	private ArrayList<Integer> results;
+	private int examNo;
 
 	public FragmentExam()
 	{
@@ -63,6 +66,8 @@ public class FragmentExam extends Fragment implements SwipeDismissListViewTouchL
 		// read word file
 		Bundle args = getArguments();
 		wordFile = (WordFile) args.getSerializable("wordFile");
+		wordList = new ArrayList<>();
+		results = new ArrayList<>();
 
 		// set add button listener
 		Button buttonAdd = rootView.findViewById(R.id.button_exam);
@@ -110,8 +115,16 @@ public class FragmentExam extends Fragment implements SwipeDismissListViewTouchL
 	public void onClick(View v)
 	{
 		FragmentTest fragmentTest = new FragmentTest();
+		Cursor cursor = cr.query(uri, new String[]{"_id", "max(examNo)"}, null, null, null);
+		examNo = 1;
+		if(cursor.moveToNext())
+			examNo = cursor.getInt(1) + 1;
+
 		Bundle args = new Bundle();
 		args.putSerializable("wordFile", wordFile);
+		args.putIntegerArrayList("wordList", wordList);
+		args.putIntegerArrayList("results", results);
+		args.putInt("examNo", examNo);
 		fragmentTest.setArguments(args);
 
 		getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragmentTest).commit();
