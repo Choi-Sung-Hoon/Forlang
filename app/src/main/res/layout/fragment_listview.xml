@@ -5,7 +5,7 @@
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent"
 	android:orientation = "vertical"
-	tools:context = ".ListViewFragment">
+	tools:context = ".FragmentListView">
 
 	<TextView
 		android:id = "@+id/tvTitle"
@@ -35,7 +35,5 @@
 		android:soundEffectsEnabled = "true"
 		android:smoothScrollbar="true"
 		android:background = "@color/LightSteelBlue"/>
-
-
 
 </LinearLayout>

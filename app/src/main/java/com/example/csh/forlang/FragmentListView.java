@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class ListViewFragment extends DialogFragment
+public class FragmentListView extends DialogFragment
 {
 	private WordListAdapter wordListAdapter;
 	private int examNo;
 
-	public ListViewFragment()
+	public FragmentListView()
 	{
 		// Required empty public constructor
 	}

@@ -1,15 +1,13 @@
 package com.example.csh.forlang;
 
 
-import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -140,13 +138,14 @@ public class FragmentExam extends Fragment implements SwipeDismissListViewTouchL
 				new int[]{R.id.tvWord, R.id.tvMeaning1, R.id.tvMeaning2, R.id.tvMeaning3}, 0);
 		cursor = cr.query(uri, new String[]{"_id", "count(*)"}, "examNo=? and correct=?", new String[]{String.valueOf(examNo), "1"}, null);
 
-		ListViewFragment listViewFragment = new ListViewFragment();
+		FragmentListView fragmentListView = new FragmentListView();
 		Bundle args = new Bundle();
 		args.putInt("examNo", examNo);
 		if(cursor.moveToNext())
 			args.putInt("score", cursor.getInt(1));
 		args.putSerializable("wordListAdapter", wordListAdapter);
-		listViewFragment.setArguments(args);
-		listViewFragment.show(getFragmentManager(), "Tag");
+		fragmentListView.setArguments(args);
+		fragmentListView.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+		fragmentListView.show(getFragmentManager(), "Tag");
 	}
 }
