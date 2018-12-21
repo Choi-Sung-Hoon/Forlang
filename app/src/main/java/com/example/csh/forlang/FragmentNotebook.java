@@ -46,7 +46,7 @@ public class FragmentNotebook extends Fragment implements SwipeDismissListViewTo
 				new String[]{"word", "meaning1", "meaning2", "meaning3"},
 				new int[]{R.id.tvWord, R.id.tvMeaning1, R.id.tvMeaning2, R.id.tvMeaning3}, 0);
 
-		ListView listView = rootView.findViewById(R.id.list_view);
+		ListView listView = rootView.findViewById(R.id.list_word);
 		listView.setEmptyView(rootView.findViewById(R.id.list_empty));
 		listView.setAdapter(adapter);
 		SwipeDismissListViewTouchListener touchListener = new SwipeDismissListViewTouchListener(listView, this);

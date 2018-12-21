@@ -45,7 +45,7 @@ public class FragmentTest extends Fragment implements View.OnClickListener, Text
 	private String answer, word, meanings[];
 	private ArrayList<Integer> wordList;
 	private ArrayList<Integer> results;
-	private int examNo;
+	private int examNo, progress;
 
 	public FragmentTest()
 	{
@@ -64,6 +64,7 @@ public class FragmentTest extends Fragment implements View.OnClickListener, Text
 		wordList = args.getIntegerArrayList("wordList");
 		results = args.getIntegerArrayList("results");
 		examNo = args.getInt("examNo");
+		progress = args.getInt("progress");
 
 		// pick a random word
 		int random_index = (new Random()).nextInt(wordFile.getLength());
@@ -76,24 +77,19 @@ public class FragmentTest extends Fragment implements View.OnClickListener, Text
 		wordList.add(random_index);
 
 		// change word form
-		if(length < 4)
+		for (int i = 0; i < word.length(); i++)
 		{
-			word = "";
-			for(int i = 0; i < length; i++);
-				word = word.concat("_");
-		}
-		else
-		{
-			for (int i = 0; i < word.length(); i++)
-			{
-				if (i > 1 && (new Random()).nextInt(2) == 1)
-					word = word.substring(0, i) + '_' + word.substring(i + 1);
-			}
+			if (i > 1 && (new Random()).nextInt(100) < 65)
+				word = word.substring(0, i) + '_' + word.substring(i + 1);
 		}
 
 		// set TextView
-		TextView tv = rootView.findViewById(R.id.tvWord);
-		tv.setText(word);
+		TextView tvProgress = rootView.findViewById(R.id.tvProgress);
+		tvProgress.setText(progress + " / 10");
+
+		// set TextView
+		TextView tvWord = rootView.findViewById(R.id.tvWord);
+		tvWord.setText(word);
 
 		// set speaker button
 		tts = new TextToSpeech(getActivity(), this);
@@ -141,7 +137,7 @@ public class FragmentTest extends Fragment implements View.OnClickListener, Text
 		{
 			case R.id.button_speaker:
 			{
-				tts.speak(word, TextToSpeech.QUEUE_FLUSH, null, null);
+				tts.speak(answer, TextToSpeech.QUEUE_FLUSH, null, null);
 				break;
 			}
 			case R.id.button_submit:
@@ -163,6 +159,7 @@ public class FragmentTest extends Fragment implements View.OnClickListener, Text
 					args.putIntegerArrayList("wordList", wordList);
 					args.putIntegerArrayList("results", results);
 					args.putInt("examNo", examNo);
+					args.putInt("progress", progress + 1);
 					fragmentTest.setArguments(args);
 
 					getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragmentTest).commit();

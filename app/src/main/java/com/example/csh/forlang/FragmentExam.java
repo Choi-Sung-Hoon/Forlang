@@ -1,6 +1,7 @@
 package com.example.csh.forlang;
 
 
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
@@ -12,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -21,9 +23,10 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentExam extends Fragment implements SwipeDismissListViewTouchListener.DismissCallbacks, View.OnClickListener
+public class FragmentExam extends Fragment implements SwipeDismissListViewTouchListener.DismissCallbacks, View.OnClickListener, ListView.OnItemClickListener
 {
-	private ExamListAdapter adapter;
+	private ExamListAdapter examListAdapter;
+	private WordListAdapter wordListAdapter;
 	private Context context;
 	private ContentResolver cr;
 	private Uri uri;
@@ -47,7 +50,7 @@ public class FragmentExam extends Fragment implements SwipeDismissListViewTouchL
 		uri = Uri.parse("content://forlang.provider/MyWords");
 
 		Cursor cursor = cr.query(uri, new String[]{"distinct _id", "examNo"}, "examNo>?", new String[]{"0"}, null);
-		adapter = new ExamListAdapter(
+		examListAdapter = new ExamListAdapter(
 				context,
 				R.layout.list_item_exam,
 				cursor,
@@ -56,12 +59,17 @@ public class FragmentExam extends Fragment implements SwipeDismissListViewTouchL
 
 		ListView listView = rootView.findViewById(R.id.list_exam);
 		listView.setEmptyView(rootView.findViewById(R.id.list_empty));
-		listView.setAdapter(adapter);
+		listView.setAdapter(examListAdapter);
+		listView.setOnItemClickListener(this);
 		SwipeDismissListViewTouchListener touchListener = new SwipeDismissListViewTouchListener(listView, this);
 		listView.setOnTouchListener(touchListener);
 		// Setting this scroll listener is required to ensure that during ListView scrolling,
 		// we don't look for swipes.
 		listView.setOnScrollListener(touchListener.makeScrollListener());
+
+		// set add button listener
+		Button buttonAdd = rootView.findViewById(R.id.button_exam);
+		buttonAdd.setOnClickListener(this);
 
 		// read word file
 		Bundle args = getArguments();
@@ -69,26 +77,7 @@ public class FragmentExam extends Fragment implements SwipeDismissListViewTouchL
 		wordList = new ArrayList<>();
 		results = new ArrayList<>();
 
-		// set add button listener
-		Button buttonAdd = rootView.findViewById(R.id.button_exam);
-		buttonAdd.setOnClickListener(this);
-
 		return rootView;
-	}
-
-	@Override
-	public void onDestroy()
-	{
-		super.onDestroy();
-		if(adapter != null)
-		{
-			TextToSpeech tts = adapter.getTTS();
-			if(tts != null)
-			{
-				tts.stop();
-				tts.shutdown();
-			}
-		}
 	}
 
 	@Override
@@ -103,30 +92,61 @@ public class FragmentExam extends Fragment implements SwipeDismissListViewTouchL
 		Cursor c;
 		for (int position : reverseSortedPositions)
 		{
-			c = (Cursor) adapter.getItem(position);
+			c = (Cursor) examListAdapter.getItem(position);
 			int examNo = c.getInt(1);
 			cr.delete(uri, "examNo=?", new String[]{String.valueOf(examNo)});
 		}
 		c = cr.query(uri, new String[]{"distinct _id", "examNo"}, "examNo>?", new String[]{"0"}, null);
-		adapter.changeCursor(c);
+		examListAdapter.changeCursor(c);
 	}
 
 	@Override
 	public void onClick(View v)
 	{
-		FragmentTest fragmentTest = new FragmentTest();
-		Cursor cursor = cr.query(uri, new String[]{"_id", "max(examNo)"}, null, null, null);
-		examNo = 1;
-		if(cursor.moveToNext())
-			examNo = cursor.getInt(1) + 1;
+		switch(v.getId())
+		{
+			case R.id.button_exam:
+			{
+				FragmentTest fragmentTest = new FragmentTest();
+				Cursor cursor = cr.query(uri, new String[]{"_id", "max(examNo)"}, null, null, null);
+				examNo = 1;
+				if (cursor.moveToNext())
+					examNo = cursor.getInt(1) + 1;
 
+				Bundle args = new Bundle();
+				args.putSerializable("wordFile", wordFile);
+				args.putIntegerArrayList("wordList", wordList);
+				args.putIntegerArrayList("results", results);
+				args.putInt("examNo", examNo);
+				args.putInt("progress", 1);
+				fragmentTest.setArguments(args);
+
+				getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragmentTest).commit();
+			}
+		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+	{
+		int examNo = position + 1;
+
+		Cursor cursor = cr.query(uri, new String[]{"_id", "word", "meaning1", "meaning2", "meaning3"}, "examNo=?", new String[]{String.valueOf(examNo)}, null);
+		wordListAdapter = new WordListAdapter(
+				context,
+				R.layout.list_item_word,
+				cursor,
+				new String[]{"word", "meaning1", "meaning2", "meaning3"},
+				new int[]{R.id.tvWord, R.id.tvMeaning1, R.id.tvMeaning2, R.id.tvMeaning3}, 0);
+		cursor = cr.query(uri, new String[]{"_id", "count(*)"}, "examNo=? and correct=?", new String[]{String.valueOf(examNo), "1"}, null);
+
+		ListViewFragment listViewFragment = new ListViewFragment();
 		Bundle args = new Bundle();
-		args.putSerializable("wordFile", wordFile);
-		args.putIntegerArrayList("wordList", wordList);
-		args.putIntegerArrayList("results", results);
 		args.putInt("examNo", examNo);
-		fragmentTest.setArguments(args);
-
-		getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragmentTest).commit();
+		if(cursor.moveToNext())
+			args.putInt("score", cursor.getInt(1));
+		args.putSerializable("wordListAdapter", wordListAdapter);
+		listViewFragment.setArguments(args);
+		listViewFragment.show(getFragmentManager(), "Tag");
 	}
 }

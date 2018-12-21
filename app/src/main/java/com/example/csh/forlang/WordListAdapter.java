@@ -10,9 +10,10 @@ import android.widget.ImageButton;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.Locale;
 
-public class WordListAdapter extends SimpleCursorAdapter implements View.OnClickListener, TextToSpeech.OnInitListener
+public class WordListAdapter extends SimpleCursorAdapter implements View.OnClickListener, TextToSpeech.OnInitListener, Serializable
 {
 	private TextToSpeech tts;
 
