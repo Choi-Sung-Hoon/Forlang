@@ -3,7 +3,7 @@ Forlang
 
 ![Forlang](https://user-images.githubusercontent.com/33472400/71341894-8b477d00-259e-11ea-99b9-c100f6e66344.png)  
 
-[한국어 README](https://github.com/Choi-Sung-Hoon/Forlang/blob/master/README.ko.md)  
+README: [한국어](README.ko.md), [English](README.md)  
 
 </br>
 
